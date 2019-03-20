@@ -1,63 +1,42 @@
 import React, { Component } from 'react';
+import logo from './logo.svg';
 import './App.css';
-import { connect } from 'react-redux';
-import { getJokes, addJoke, deleteJoke, updateJoke } from './actions'
 import Jokes from './components/Jokes';
-import JokeForm from './components/CreateJokeForm';
+import JokeForm from './components/JokeForm';
+import { getJokes } from './actions';
+import { connect } from 'react-redux';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isUpdate: false,
-      updatingJoke: {}
-    }
-  }
-
   componentDidMount() {
-    this.props.getJokes()
-  }
-
-  handleUpdate = event => {
-    this.setState({
-      isUpdate: true,
-      updatingJoke: this.props.jokes.filter(joke => joke.id === event.target.id)[0]
-    })
-  }
-
-  updateSubmit = joke => {
-    this.setState({
-      isUpdate: false,
-      updatingJoke: {}
-    })
-
-    this.props.updateJoke(joke)
+    this.props.getJokes();
   }
   render() {
     return (
       <div className="App">
-        <h1>Quick Jokes!</h1>
-        <Jokes {...this.props} onUpdate={this.handleUpdate} />
-        <JokeForm {...this.props} />
+        <header className="App-header">
+          <h1 className="App-Title">{`Quick Jokes`}</h1>
+          <JokeForm />
+        </header>
+        {this.props.error ? <h3>Error Fetching Jokes</h3> : null}
+        <div className="Flex-Container">
+          {this.props.gettingJokes ? (
+            <img src={logo} className="App-logo" alt="logo" />
+          ) : (
+            <Jokes jokes={this.props.jokes} />
+          )}
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProsp = (state) => {
+const mapStateToProps = state => {
+  const { jokesReducer } = state;
   return {
-    fetchingJokes: state.fetchingJokes,
-    jokesFetched: state.jokesFetched,
-    jokes: state.jokes,
-    error: state.error,
-    updatingJoke: state.updatingJoke,
-    jokeUpdated: state.jokeUpdated,
-  }
-}
+    jokes: jokesReducer.jokes,
+    error: jokesReducer.error,
+    gettingJokes: jokesReducer.gettingJokes
+  };
+};
 
-export default connect(mapStateToProsp, {
-  getJokes,
-  addJoke,
-  deleteJoke,
-  updateJoke
-})(App);
+export default connect(mapStateToProps, { getJokes })(App);

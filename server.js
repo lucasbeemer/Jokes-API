@@ -6,8 +6,6 @@ const port = 5000;
 const server = express();
 server.use(express.json());
 
-let nextId = 10;
-
 let jokes = [
     {
         id: 0,
@@ -61,6 +59,8 @@ let jokes = [
     },
 ];
 
+let id = jokes.length;
+
 server.use(bodyParser.json());
 server.use(cors());
 
@@ -70,62 +70,54 @@ server.get('/', (req, res) => {
 });
 
 // READ DATA
-server.get('/api/jokes', (req, res) => {
+server.get('/api/jokes/get', (req, res) => {
     setTimeout(() => {
       res.send(jokes);
     }, 1000);
   });
 
 // READ 1 object of DATA by id
-server.get('/api/jokes/:id', (req, res) => {
-    const joke = jokes.find(j => j.id == req.params.id);
+// server.get('/api/jokes/:id', (req, res) => {
+//     const joke = jokes.find(j => j.id == req.params.id);
   
-    if (joke) {
-      res.status(200).json(joke);
-    } else {
-      res.status(404).send({ msg: 'joke not found' });
-    }
-  });
+//     if (joke) {
+//       res.status(200).json(joke);
+//     } else {
+//       res.status(404).send({ msg: 'joke not found' });
+//     }
+//   });
 
 // CREATE 1 object of DATA
-server.post('/api/jokes', (req, res) => {
-    const joke = { id: getNextId(), ...req.body };
-    jokes = [...jokes, joke];
+server.post('/api/jokes/create', (req, res) => {
+    ++id;
+    const { q, p } = req.body;
+    const myJoke = { id, q, p };
+    jokes.push(myJoke);
     res.send(jokes);
   });
 
 
 // UPDATE 1 object of DATA
-server.put('/api/jokes/:id', (req, res) => {
-    const { id } = req.params;
-    const jokeIndex = jokes.findIndex(j => j.id == id);
-  
-    if (jokeIndex > -1) {
-      const joke = { ...jokes[jokeIndex], ...req.body };
-  
-      jokes = [
-        ...jokes.slice(0, jokeIndex),
-        joke,
-        ...jokes.slice(jokeIndex + 1),
-      ];
-      res.send(jokes);
-    } else {
-      res.status(404).send({ msg: 'Joke not found' });
-    }
+server.put('/api/jokes/update', (req, res) => {
+  const { q, p } = req.body;
+  const updatedJoke = { q, p };
+  const newJokes = jokes.map(joke => {
+    return (joke = updatedJoke);
   });
+  jokes = newJokes;
+  res.send(jokes);
+});
 
 // DELETE DATA
-server.delete('/api/jokes/:id', (req, res) => {
-    const { id } = req.params;
-    jokes = jokes.filter(j => j.id !== Number(id));
-    res.send(jokes);
+server.delete('/api/jokes/delete', (req, res) => {
+  const id = req.body.id;
+  const newJokes = jokes.filter(joke => {
+    return id !== joke.id;
   });
-
-  function getNextId() {
-    return nextId++;
-  }
+  jokes = newJokes;
+  res.send(jokes);
+});
   
-
 server.listen(port, () => {
     console.log(`\n Server listening on port ${port} \n`);
 });

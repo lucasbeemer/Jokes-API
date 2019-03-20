@@ -3,59 +3,55 @@
 }
 
 .App {
-  background: white;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 25px 0;
-}
-
-h1 {
-  color: #3b5998;
   text-align: center;
-  font-size: 3rem;
-  margin: 0;
-  padding-bottom: 20px;
 }
 
-.friends {
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.Friend-Container {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+}
+li {
+  list-style: none;
+}
+.Friend-List {
+  text-align: left;
 }
 
-.friend {
-  width: 40%;
-  border: 2px solid #3b5998;
-  padding: 7px;
-  margin: 15px;
-}
-
-.newFriend {
-  margin: 20px 0;
+.Flex-Container {
   display: flex;
-  justify-content: center;
-  align-items: flex-end; 
 }
-
-label {
-  margin: 0 10px;
-  width: 25%;
+.Column-Layout {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
 }
-
-input {
-  font-size: 1rem;
-}
-
-button {
-  font-size: .7rem;
-  border-radius: 5px;
-  margin: 0 4px;
-  width: 60px;
-  height: 25px;
-}
-
-button:hover {
-  background: rgb(219, 219, 219);
-  cursor: pointer;
+.input {
+  padding: 10;
 }

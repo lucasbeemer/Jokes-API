@@ -1,69 +1,73 @@
 import axios from 'axios'
 
-export const FETCHING_JOKES = 'FETCHING_JOKES';
-export const FETCHED_JOKES = 'FETCHED_JOKES';
-export const SAVING_JOKES = 'SAVING_JOKES';
-export const SAVED_JOKES = 'SAVED_JOKES';
-export const UPDATING_JOKES = 'UPDATING_JOKES';
-export const UPDATED_JOKES = 'UPDATED_JOKES';
-export const DELETING_JOKES = 'DELETING_JOKES';
-export const DELETED_JOKES = 'DELETED_JOKES';
 export const ERROR = 'ERROR';
+export const GET_JOKES = 'GET_JOKES';
+export const GETTING_JOKES = 'GETTING_JOKES';
+export const CREATING_JOKE = 'CREATING_JOKE';
+export const CREATE_JOKE = 'CREATE_JOKE';
+export const UPDATE_JOKE = 'UPDATE_JOKES';
+export const DELETE_JOKE = 'DELETE_JOKE';
+export const UPDATING_JOKE = 'UPDATING_JOKE';
+export const DELETING_JOKE = 'DELETING_JOKE';
+export const SINGLE_JOKE = 'SINGLE_JOKE';
+export const TOGGLE_UPDATE_JOKE = 'TOGGLE_UPDATE_JOKE';
+
+const URL = 'http://localhost:5000/api/jokes';
 
 export const getJokes = () => {
+  const jokes = axios.get(`${URL}/get`);
   return dispatch => {
-    dispatch({ type: FETCHING_JOKES })
-    axios.get('http://localhost:5000/api/jokes')
-      .then(res => {
-        dispatch({ type: FETCHED_JOKES, payload: res.data })
-      })
-      .catch(error => {
-        dispatch({ type: ERROR })
-      })
-  }
-}
-
-export const addJoke = joke => {
-  return dispatch => {
-    dispatch({ type: SAVING_JOKES })
-    axios.post('http://localhost:5000/api/jokes', {
-      q: joke.q,
-      p: joke.p
-    })
-      .then(res => {
-        dispatch({ type: SAVED_JOKES, payload: res.data })
+    dispatch({ type: GETTING_JOKES });
+    jokes
+      .then(response => {
+        dispatch({ type: GET_JOKES, payload: response.data });
       })
       .catch(err => {
-        dispatch({ type: ERROR, payload: err })
-      })
-  }
-}
+        dispatch({ type: ERROR, payload: err });
+      });
+  };
+};
 
-export const updateJoke = joke => {
+export const createJoke = joke => {
+  const newJoke = axios.post(`${URL}/create`, joke);
   return dispatch => {
-    dispatch({ type: UPDATING_JOKES });
-    axios.put(`http://localhost:5000/api/jokes/${joke.id}`, {
-      q: joke.q,
-      p: joke.p,
-    })
-      .then(res => {
-        dispatch({ type: UPDATED_JOKES, payload: res.data })
+    dispatch({ type: CREATING_JOKE });
+    newJoke
+      .then(({ data }) => {
+        dispatch({ type: CREATE_JOKE, payload: data });
       })
       .catch(err => {
-        dispatch({ TYPE: ERROR, payload: err });
-      })
-  }
-}
+        dispatch({ type: ERROR, payload: err });
+      });
+  };
+};
 
-export const deleteJoke = jokeId => {
+export const deleteJoke = id => {
+  const deletedJoke = axios.delete(`${URL}/delete`, {
+    data: { id }
+  });
   return dispatch => {
-    dispatch({ type: DELETING_JOKES });
-    axios.delete(`http://localhost:5000/api/jokes/${jokeId}`)
-      .then(res => {
-        dispatch({ type: DELETED_JOKES, payload: res.data })
+    dispatch({ type: DELETING_JOKE });
+    deletedJoke
+      .then(({ data }) => {
+        dispatch({ type: DELETE_JOKE, payload: data });
+        dispatch({ type: SINGLE_JOKE, payload: {} });
       })
       .catch(err => {
-        dispatch({ TYPE: ERROR, payload: err });
-      })
-  }
-}
+        dispatch({ type: ERROR, payload: err });
+      });
+  };
+};
+
+export const toggleShowUpdate = () => {
+  return {
+    type: TOGGLE_UPDATE_JOKE
+  };
+};
+
+export const updateSingleJoke = joke => {
+  return {
+    type: SINGLE_JOKE,
+    payload: joke
+  };
+};
