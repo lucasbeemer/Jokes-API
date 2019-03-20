@@ -14,8 +14,13 @@
 .App-header {
   background-color: #222;
   height: 150px;
-  padding: 20px;
+  padding-top: 15px;
+  padding-bottom: 30px;
   color: white;
+}
+
+.App-header h1 {
+  margin: 0px;
 }
 
 .App-title {
@@ -34,24 +39,78 @@
     transform: rotate(360deg);
   }
 }
-.Friend-Container {
-  display: flex;
-}
-li {
-  list-style: none;
-}
-.Friend-List {
-  text-align: left;
+button:hover {
+  cursor: pointer;
 }
 
 .Flex-Container {
   display: flex;
+  justify-content: center;
 }
-.Column-Layout {
+
+.Joke-Container {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+}
+.joke {
+  border-bottom: 2px solid #222;
+  color: white;
+  font-size: 24px;
+  padding: 20px 10px;
+  list-style: none;
+}
+
+.joke:hover {
+  font-weight: bold;
+}
+
+.Joke-List {
+  width: 50%;
+  text-align: left;
+}
+
+.single-joke {
+  width: 45%;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+}
+
+.single-joke h2 {
+  text-align: left;
+}
+
+.single-joke button {
+  width: 25%;
+  font-size: 16px;
+  border-radius: 20px;
+  margin: 0px 10px;
+}
+
+.single-joke button:hover {
+  background-color: lightblue;
+}
+
+.Column-Layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
 }
 .input {
+  font-size: 20px;
+  width: 50%;
   padding: 10;
+  margin: 5px 0px;
+}
+
+button {
+  width: 10%;
+  font-size: 16px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+button:hover {
+  background-color: lightblue;
 }

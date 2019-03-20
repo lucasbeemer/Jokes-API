@@ -3,8 +3,8 @@ import React from 'react';
 const UpdateJokeForm = props => {
   return (
     <form>
-      <input placeholder={props.friend.q} />
-      <input placeholder={props.friend.p} />
+      <input placeholder={props.joke.name} />
+      <input placeholder={props.joke.p} />
     </form>
   );
 };

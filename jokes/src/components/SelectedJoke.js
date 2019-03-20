@@ -1,17 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const ButtonContainer = styled.div`
+  display: flex;
+`;
 
 export default function SelectedJoke(props) {
   return (
-    <div>
-      <h4>{props.selected.q}</h4>
-      <span onClick={() => props.handleShowJoke({})}> X </span>
-      <div>{props.selected.p}</div>
-      <button onClick={() => props.handleDeleteJoke()}>{`Delete ${
-        props.selected.q
-      }`}</button>
-      <button onClick={() => props.toggleShowUpdate()}>{`Update ${
-        props.selected.q
-      }`}</button>
+    <div className="single-joke">
+      <h2>{props.selected.p}</h2>
+      <ButtonContainer>
+        <button onClick={() => props.handleDeleteJoke()}>{`Delete`}</button>
+        <button onClick={() => props.toggleShowUpdate()}>{`Update`}</button>
+      </ButtonContainer>
     </div>
   );
 }

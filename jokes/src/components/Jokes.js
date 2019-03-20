@@ -22,25 +22,25 @@ class Jokes extends Component {
   render() {
     return (
       <div className="Joke-Container">
-        <ul className="Joke-List">
+        <div className="Joke-List">
           {this.props.jokes.map(joke => {
             return (
-              <li onClick={() => this.handleShowJoke(joke)} key={joke.id}>
+              <div className="joke" onClick={() => this.handleShowJoke(joke)} key={joke.id}>
                 {joke.name}
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
         {Object.keys(this.props.jokeSelected).length > 0 ? (
           <SelectedJoke
             handleShowjoke={this.handleShowJoke}
             toggleShowUpdate={this.toggleShowUpdate}
             handleDeleteJoke={this.handleDeleteJoke}
-            selected={this.props.JokeSelected}
+            selected={this.props.jokeSelected}
           />
         ) : null}
         {this.props.showUpdate ? (
-          <UpdateJokeForm friend={this.props.jokeSelected} />
+          <UpdateJokeForm joke={this.props.jokeSelected} />
         ) : null}
         {this.props.deletingJoke ? (
           <img src={logo} className="App-logo" alt="logo" />

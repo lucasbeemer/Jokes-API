@@ -4,7 +4,7 @@ import { createJoke } from '../actions';
 
 class JokeForm extends Component {
   state = {
-    q: '',
+    name: '',
     p: '',
   };
   handleInputChange = event => {
@@ -12,9 +12,9 @@ class JokeForm extends Component {
   };
 
   handleAddJoke = _ => {
-    const { q, p, } = this.state;
-    this.props.createJoke({ q, p, });
-    this.setState({ q: '', p: '' });
+    const { name, p, } = this.state;
+    this.props.createJoke({ name, p, });
+    this.setState({ name: '', p: '' });
   };
 
   render() {
@@ -22,8 +22,8 @@ class JokeForm extends Component {
       <form className="Column-Layout">
         <input
           className="input"
-          value={this.state.q}
-          name="q"
+          value={this.state.name}
+          name="name"
           type="text"
           placeholder="joke set-up"
           onChange={this.handleInputChange}

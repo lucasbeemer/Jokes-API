@@ -9,52 +9,52 @@ server.use(express.json());
 let jokes = [
     {
         id: 0,
-        q: "Why did the scarecrow get a Promotion?",
+        name: "Why did the scarecrow get a Promotion?",
         p: "Because he was outstanding in his field!"
     },
     {
         id: 1,
-        q: "What do you call a lawyer who doesn't know the law?",
+        name: "What do you call a lawyer who doesn't know the law?",
         p: "A judge"
     },
     {
         id: 2,
-        q: "Why did the hipster burn his mouth?",
+        name: "Why did the hipster burn his mouth?",
         p: "He drank the coffee before it was cool."
     },
     {
         id: 3,
-        q: "What’s the best thing about Switzerland?",
+        name: "What’s the best thing about Switzerland?",
         p: "I don't know, but the flag is big plus."
     },
     {
         id: 4,
-        q: "Did you hear about the claustrophobic astronaut?",
+        name: "Did you hear about the claustrophobic astronaut?",
         p: "He just needed a little space."
     },
     {
         id: 5,
-        q: "What kind of exercise do lazy people do?",
+        name: "What kind of exercise do lazy people do?",
         p: "Diddly squats."
     },
     {
         id: 6,
-        q: "What do you call a fake noodle?",
+        name: "What do you call a fake noodle?",
         p: "An impasta!"
     },
     {
         id: 7,
-        q: "What did the shark say when he ate the clownfish?",
+        name: "What did the shark say when he ate the clownfish?",
         p: "This tastes a little funny."
     },
     {
         id: 8,
-        q: "What is an astronaut’s favorite part on a computer?",
+        name: "What is an astronaut’s favorite part on a computer?",
         p: "The space bar."
     },
     {
         id: 9,
-        q: "Did you hear about the two people who stole a calendar?",
+        name: "Did you hear about the two people who stole a calendar?",
         p: "They each got six months."
     },
 ];
@@ -90,8 +90,8 @@ server.get('/api/jokes/get', (req, res) => {
 // CREATE 1 object of DATA
 server.post('/api/jokes/create', (req, res) => {
     ++id;
-    const { q, p } = req.body;
-    const myJoke = { id, q, p };
+    const { name, p } = req.body;
+    const myJoke = { id, name, p };
     jokes.push(myJoke);
     res.send(jokes);
   });
@@ -99,8 +99,8 @@ server.post('/api/jokes/create', (req, res) => {
 
 // UPDATE 1 object of DATA
 server.put('/api/jokes/update', (req, res) => {
-  const { q, p } = req.body;
-  const updatedJoke = { q, p };
+  const { name, p } = req.body;
+  const updatedJoke = { name, p };
   const newJokes = jokes.map(joke => {
     return (joke = updatedJoke);
   });
