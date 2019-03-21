@@ -5,6 +5,19 @@ import SelectedJoke from './SelectedJoke';
 import { connect } from 'react-redux';
 import { deleteJoke, updateSingleJoke, toggleShowUpdate } from '../actions';
 import UpdateJokeForm from './UpdateJokeForm.js';
+import styled from 'styled-components';
+
+const JokeText = styled.div`
+  border-bottom: 2px solid #222;
+  color: white;
+  font-size: 20px;
+  padding: 10px 0px;
+  list-style: none;
+    &:hover {
+      color: #0f0f0f;
+      cursor: pointer;
+    }
+`;
 
 class Jokes extends Component {
   handleDeleteJoke = () => {
@@ -26,7 +39,8 @@ class Jokes extends Component {
           {this.props.jokes.map(joke => {
             return (
               <div className="joke" onClick={() => this.handleShowJoke(joke)} key={joke.id}>
-                {joke.name}
+                <h2>Posted by: {joke.name}</h2>
+                <JokeText>{joke.q}</JokeText>
               </div>
             );
           })}

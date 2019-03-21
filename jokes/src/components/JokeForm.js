@@ -12,9 +12,9 @@ class JokeForm extends Component {
   };
 
   handleAddJoke = _ => {
-    const { name, p, } = this.state;
-    this.props.createJoke({ name, p, });
-    this.setState({ name: '', p: '' });
+    const { name, q, p, } = this.state;
+    this.props.createJoke({ name, q, p, });
+    this.setState({ name: '', q: '', p: '' });
   };
 
   render() {
@@ -24,6 +24,14 @@ class JokeForm extends Component {
           className="input"
           value={this.state.name}
           name="name"
+          type="text"
+          placeholder="posted by"
+          onChange={this.handleInputChange}
+        />
+        <input
+          className="input"
+          value={this.state.q}
+          name="q"
           type="text"
           placeholder="joke set-up"
           onChange={this.handleInputChange}

@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const cors = require('cors');
 const port = 5000;
@@ -9,52 +10,62 @@ server.use(express.json());
 let jokes = [
     {
         id: 0,
-        name: "Why did the scarecrow get a Promotion?",
+        name: "Frances",
+        q: "Why did the scarecrow get a Promotion?",
         p: "Because he was outstanding in his field!"
     },
     {
         id: 1,
-        name: "What do you call a lawyer who doesn't know the law?",
+        name: "Reginald",
+        q: "What do you call a lawyer who doesn't know the law?",
         p: "A judge"
     },
     {
         id: 2,
-        name: "Why did the hipster burn his mouth?",
+        name: "Gretchen",
+        q: "Why did the hipster burn his mouth?",
         p: "He drank the coffee before it was cool."
     },
     {
         id: 3,
-        name: "What’s the best thing about Switzerland?",
+        name: "Stephen",
+        q: "What’s the best thing about Switzerland?",
         p: "I don't know, but the flag is big plus."
     },
     {
         id: 4,
-        name: "Did you hear about the claustrophobic astronaut?",
+        name: "Monica",
+        q: "Did you hear about the claustrophobic astronaut?",
         p: "He just needed a little space."
     },
     {
         id: 5,
-        name: "What kind of exercise do lazy people do?",
+        name: "Larry",
+        q: "What kind of exercise do lazy people do?",
         p: "Diddly squats."
     },
     {
         id: 6,
-        name: "What do you call a fake noodle?",
+        name: "Xavier",
+        q: "What do you call a fake noodle?",
         p: "An impasta!"
     },
     {
         id: 7,
-        name: "What did the shark say when he ate the clownfish?",
+        name: "Joleen",
+        nq: "What did the shark say when he ate the clownfish?",
         p: "This tastes a little funny."
     },
     {
         id: 8,
-        name: "What is an astronaut’s favorite part on a computer?",
+        name: "Ashley",
+        q: "What is an astronaut’s favorite part on a computer?",
         p: "The space bar."
     },
     {
         id: 9,
-        name: "Did you hear about the two people who stole a calendar?",
+        name: "Dan",
+        q: "Did you hear about the two people who stole a calendar?",
         p: "They each got six months."
     },
 ];
@@ -65,8 +76,8 @@ server.use(bodyParser.json());
 server.use(cors());
 
 //OPENING message
-server.get('/', (req, res) => {
-    res.send('Hello, from the Node Express Server!')
+server.get('/api', (req, res) => {
+    res.json({ message: "Welcome to the API" });
 });
 
 // READ DATA
@@ -90,8 +101,8 @@ server.get('/api/jokes/get', (req, res) => {
 // CREATE 1 object of DATA
 server.post('/api/jokes/create', (req, res) => {
     ++id;
-    const { name, p } = req.body;
-    const myJoke = { id, name, p };
+    const { name, q, p } = req.body;
+    const myJoke = { id, name, q, p };
     jokes.push(myJoke);
     res.send(jokes);
   });
@@ -99,8 +110,8 @@ server.post('/api/jokes/create', (req, res) => {
 
 // UPDATE 1 object of DATA
 server.put('/api/jokes/update', (req, res) => {
-  const { name, p } = req.body;
-  const updatedJoke = { name, p };
+  const { name, q, p } = req.body;
+  const updatedJoke = { name, q, p };
   const newJokes = jokes.map(joke => {
     return (joke = updatedJoke);
   });
