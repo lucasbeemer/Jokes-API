@@ -8,14 +8,18 @@ import UpdateJokeForm from './UpdateJokeForm.js';
 import styled from 'styled-components';
 
 const JokeText = styled.div`
-  border-bottom: 2px solid #222;
+  width: auto;
+  border-bottom: 1px solid white;
   color: white;
   font-size: 20px;
   padding: 10px 0px;
+  margin-bottom: 30px;
   list-style: none;
     &:hover {
       color: #0f0f0f;
       cursor: pointer;
+      border-bottom: 1px solid #222;
+
     }
 `;
 
@@ -39,8 +43,8 @@ class Jokes extends Component {
           {this.props.jokes.map(joke => {
             return (
               <div className="joke" onClick={() => this.handleShowJoke(joke)} key={joke.id}>
-                <h2>Posted by: {joke.name}</h2>
-                <JokeText>{joke.q}</JokeText>
+                <h2>Posted by: {joke.author}</h2>
+                <JokeText>{joke.content}</JokeText>
               </div>
             );
           })}

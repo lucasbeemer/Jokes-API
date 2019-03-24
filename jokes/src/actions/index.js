@@ -12,10 +12,10 @@ export const DELETING_JOKE = 'DELETING_JOKE';
 export const SINGLE_JOKE = 'SINGLE_JOKE';
 export const TOGGLE_UPDATE_JOKE = 'TOGGLE_UPDATE_JOKE';
 
-const URL = 'http://localhost:5000/api/jokes';
+const URL = 'http://localhost:5000';
 
 export const getJokes = () => {
-  const jokes = axios.get(`${URL}/get`);
+  const jokes = axios.get(`${URL}/posts`);
   return dispatch => {
     dispatch({ type: GETTING_JOKES });
     jokes
@@ -29,7 +29,7 @@ export const getJokes = () => {
 };
 
 export const createJoke = joke => {
-  const newJoke = axios.post(`${URL}/create`, joke);
+  const newJoke = axios.post(`${URL}/posts`, joke);
   return dispatch => {
     dispatch({ type: CREATING_JOKE });
     newJoke
@@ -43,7 +43,7 @@ export const createJoke = joke => {
 };
 
 export const deleteJoke = id => {
-  const deletedJoke = axios.delete(`${URL}/delete`, {
+  const deletedJoke = axios.delete(`${URL}/posts/:id`, {
     data: { id }
   });
   return dispatch => {

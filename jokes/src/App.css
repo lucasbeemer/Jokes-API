@@ -16,10 +16,12 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding-top: 15px;
-  padding-bottom: 30px;
+  height: 200px;
   color: white;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
 }
 
 .App-header h1 {
@@ -74,7 +76,6 @@ button:hover {
 
 .single-joke {
   width: 42%;
-  height: 20%;
   display: flex;
   flex-direction: column;
 }
@@ -93,29 +94,31 @@ button:hover {
 }
 
 .single-joke button:hover {
-  background-color: lightblue;
+  background-color: rgb(119, 195, 220);
 }
 
 .Column-Layout {
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .input {
   font-size: 20px;
-  width: 50%;
+  width: 85%;
   padding: 10;
   margin: 5px 0px;
 }
 
 button {
-  width: 10%;
-  font-size: 16px;
+  width: 20%;
+  font-size: 20px;
+  font-weight: bold;
   border-radius: 20px;
   margin-top: 10px;
 }
 button:hover {
-  background-color: lightblue;
+  background-color: rgb(119, 195, 220);
 }

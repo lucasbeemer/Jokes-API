@@ -4,17 +4,17 @@ import { createJoke } from '../actions';
 
 class JokeForm extends Component {
   state = {
-    name: '',
-    p: '',
+    author: '',
+    content: '',
   };
   handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.author]: event.target.value });
   };
 
   handleAddJoke = _ => {
-    const { name, q, p, } = this.state;
-    this.props.createJoke({ name, q, p, });
-    this.setState({ name: '', q: '', p: '' });
+    const { author, content, } = this.state;
+    this.props.createJoke({ author, content });
+    this.setState({ author: '', content: '' });
   };
 
   render() {
@@ -22,26 +22,18 @@ class JokeForm extends Component {
       <form className="Column-Layout">
         <input
           className="input"
-          value={this.state.name}
-          name="name"
+          value={this.state.author}
+          name="author"
           type="text"
           placeholder="posted by"
           onChange={this.handleInputChange}
         />
         <input
           className="input"
-          value={this.state.q}
-          name="q"
+          value={this.state.content}
+          name="content"
           type="text"
-          placeholder="joke set-up"
-          onChange={this.handleInputChange}
-        />
-        <input
-          className="input"
-          value={this.state.p}
-          name="p"
-          type="text"
-          placeholder="punchline"
+          placeholder="joke set-up and punchline"
           onChange={this.handleInputChange}
         />
         <button onClick={() => this.handleAddJoke()} type="button">
