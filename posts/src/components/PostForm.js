@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createJoke } from '../actions';
+import { createPost } from '../actions';
 
-class JokeForm extends Component {
+class PostForm extends Component {
   state = {
     author: '',
     content: '',
+    upvotes: ''
   };
+  
   handleInputChange = event => {
     this.setState({ [event.target.author]: event.target.value });
   };
 
-  handleAddJoke = _ => {
-    const { author, content, } = this.state;
-    this.props.createJoke({ author, content });
-    this.setState({ author: '', content: '' });
+  handleAddPost = _ => {
+    const { author, content, upvotes } = this.state;
+    this.props.createPost({ author, content });
+    this.setState({ author: '', content: '', upvotes: '' });
   };
 
   render() {
@@ -25,7 +27,7 @@ class JokeForm extends Component {
           value={this.state.author}
           name="author"
           type="text"
-          placeholder="posted by"
+          placeholder="Posted by"
           onChange={this.handleInputChange}
         />
         <input
@@ -33,11 +35,11 @@ class JokeForm extends Component {
           value={this.state.content}
           name="content"
           type="text"
-          placeholder="joke set-up and punchline"
+          placeholder="Your post here"
           onChange={this.handleInputChange}
         />
-        <button onClick={() => this.handleAddJoke()} type="button">
-          Add Joke
+        <button onClick={() => this.handleAddPost()} type="button">
+          Add Post
         </button>
       </form>
     );
@@ -47,8 +49,8 @@ class JokeForm extends Component {
 const mapStateToProps = state => {
   return {
     error: state.error,
-    creatingJoke: state.creatingJoke
+    creatingPost: state.creatingPost
   };
 };
 
-export default connect(mapStateToProps, { createJoke })(JokeForm);
+export default connect(mapStateToProps, { createPost })(PostForm);

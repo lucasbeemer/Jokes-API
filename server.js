@@ -32,10 +32,10 @@ server.get('/posts', (req, res) => {
 
 // READ 1 object of DATA by id
 server.get('/posts/:id', (req, res) => {
-    const joke = jokes.find(joke => joke.id == req.params.id);
+    const post = posts.find(post => post.id == req.params.id);
   
-    if (joke) {
-      res.status(200).json(joke);
+    if (post) {
+      res.status(200).json(post);
     } else {
       res.status(404).send({ msg: 'content not found' });
     }

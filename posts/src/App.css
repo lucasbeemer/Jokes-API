@@ -54,46 +54,46 @@ button:hover {
   justify-content: center;
 }
 
-.Joke-Container {
+.post-Container {
   width: 95%;
   display: flex;
   justify-content: space-between;
 }
-.joke {
+.post {
   width: 85%;
   color: white;
   list-style: none;
 }
 
-.joke h2 {
+.post h2 {
   margin-bottom: 10px;
 }
 
-.Joke-List {
+.post-List {
   width: 50%;
   text-align: left;
 }
 
-.single-joke {
+.single-post {
   width: 42%;
   display: flex;
   flex-direction: column;
 }
 
-.single-joke h2 {
+.single-post h2 {
   text-align: left;
   color: #0f0f0f;
   font-size: 26px;
 }
 
-.single-joke button {
+.single-post button {
   width: 25%;
   font-size: 16px;
   border-radius: 20px;
   margin: 0px 10px;
 }
 
-.single-joke button:hover {
+.single-post button:hover {
   background-color: rgb(119, 195, 220);
 }
 
